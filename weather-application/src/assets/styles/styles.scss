@@ -1,0 +1,250 @@
+@import "./reset.scss";
+@import "./variables.scss";
+
+body {
+  * {
+    font-family: $fontRegular;
+  }
+}
+
+.weatherSection {
+  margin: 4rem 0;
+
+  .title {
+    display: block;
+    text-align: center;
+    font-size: 3rem;
+  }
+
+  .errorMsg {
+    width: 100%;
+    text-align: center;
+    color: red;
+    font-size: 1.6rem;
+  }
+
+  .weatherInTitle {
+    display: block;
+    text-align: left;
+    font-size: 3rem;
+  }
+
+  .mat-select-value,
+  .mat-input-element,
+  .mat-form-field-label {
+    font-size: 1.6rem;
+  }
+
+  .mat-form-field-wrapper {
+    padding: 0;
+  }
+
+  .mat-form-field-underline {
+    bottom: 0;
+  }
+
+  .mat-form-field-appearance-legacy {
+    .mat-form-field-label {
+      top: auto;
+    }
+
+    .mat-form-field-wrapper {
+      padding: 1rem;
+    }
+  }
+
+  .mat-form-field-appearance-fill {
+    .mat-select-arrow-wrapper {
+      transform: none;
+    }
+
+    .mat-form-field-flex {
+      padding: 1rem;
+    }
+  }
+
+  .weatherForm {
+    margin: 4rem 0;
+    max-height: 100%;
+    overflow: auto;
+  }
+
+  .formFieldWarpper {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .formField {
+    width: 100%;
+    padding: 0 2rem;
+    margin-bottom: 3rem;
+
+    &.mat-form-field-invalid {
+      .mat-form-field-subscript-wrapper {
+        bottom: -2rem;
+        top: auto;
+      }
+
+      .mat-error {
+        font-size: 1.4rem;
+      }
+    }
+  }
+
+  .mat-form-field-infix {
+    width: auto;
+  }
+
+  .cityWeather {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: 2rem;
+    margin: 1rem 0 2rem;
+  }
+
+  .icon {
+    max-width: 75%;
+  }
+
+  
+  .cityName {
+    display: inline-block;
+    margin-right: 1rem;
+  }
+
+  .temp {
+    display: inline-block;
+    position: relative;
+
+    &::after {
+      position: absolute;
+      content: "";
+      top: 0;
+      right: -5px;
+      border: 1px solid $colorBlack;
+      border-radius: 50%;
+      width: 0.5rem;
+      height: 0.5rem;
+    }
+  }
+
+  .status {
+    display: inline-block;
+    margin-left: 10px;
+  }
+
+  .addItem {
+    position: relative;
+    width: 5rem;
+    height: 5rem;
+    cursor: pointer;
+    margin: 0 0 3rem auto;
+    background-color: transparent;
+    border: none;
+
+    &:hover {
+      &::after,
+      &::before {
+        width: 90%;
+      }
+    }
+
+    &::after,
+    &::before {
+      position: absolute;
+      content: "";
+      background-color: $colorBlack;
+      width: 80%;
+      height: 0.4rem;
+      top: 50%;
+      left: 50%;
+      @include transitionMove();
+    }
+
+    &::after {
+      transform: translate(-50%, -50%);
+    }
+
+    &::before {
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
+  }
+
+  .weatherInContainer {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .weatherList {
+    padding: 0;
+    margin: 2rem 0 0 2rem;
+
+    .item {
+      font-size: 1.6rem;
+
+      & + .item {
+        margin-top: 1.5rem;
+      }
+    }
+  }
+}
+
+.cityPanelClass {
+  &.mat-select-panel {
+    .mat-option {
+      padding: 1.6rem;
+      height: auto;
+    }
+  }
+  .mat-option-text {
+    font-size: 1.6rem;
+  }
+}
+
+@media screen and (min-width: $screenSm) {
+  .weatherSection  {
+    .cityWeather {
+      font-size: 4rem;
+    }
+
+    .temp {
+      &::after {
+        right: -10px;
+        width: 1rem;
+        height: 1rem;
+      }
+    }
+
+  .formField {
+    width: 40%;
+    padding: 0 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .icon {
+    max-width: 100%;
+  }
+
+  .weatherForm {
+    max-height: 40rem;
+  }
+
+  .weatherInContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+  }
+
+  .weatherList {
+    margin: 0 0 0 5rem;
+
+    .item {
+      font-size: 3rem;
+    }
+  }
+}
+
+}

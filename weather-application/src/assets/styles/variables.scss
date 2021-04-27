@@ -1,0 +1,38 @@
+
+
+$fontLight: 'RobotoLight';
+$fontRegular: 'RobotoRegular';
+$fontBold: 'RobotoBold';
+
+$colorBlack: #000;
+
+$screenSm: 768px;
+$screenLg: 992px;
+$screenXl: 1200px;
+$screenXXl: 1600px;
+
+@mixin transitionMove {
+    transition: linear all .3s;
+}
+
+@mixin underlineAdd($color, $bottom) {
+    &::after {
+        position: absolute;
+        content: "";
+        background-color: $color;
+        height: 1px;
+        left: 50%;
+        right: 50%;
+        bottom: $bottom;
+        @include transitionMove();
+      }
+
+      &:hover {
+          color: $color;
+        &::after {
+          right: 0;
+          left: 0;
+          @include transitionMove();
+        }
+      }
+}

@@ -1,0 +1,71 @@
+<section class="weatherSection">
+  <div class="containerFluid">
+    <h1 class="title">Check Weather</h1>
+    <form class="weatherForm" [formGroup]="weatherFormGroup">
+      <div
+        formArrayName="cities"
+        *ngFor="let item of citiesGroups.controls; let i = index"
+      >
+        <div class="formFieldWarpper" [formGroupName]="i">
+          <mat-form-field class="formField" appearance="fill">
+            <mat-select
+              panelClass="cityPanelClass"
+              placeholder="Choose City"
+              formControlName="city"
+            >
+              <mat-option [disabled]="city.disabled" *ngFor="let city of cities" [value]="city">{{
+                city.name
+              }}</mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="citiesGroups.controls[i].get('city')?.errors?.required"
+              >Choose City</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field class="formField" appearance="fill">
+            <input
+              autocomplete="off"
+              matInput
+              placeholder="Units (standard, metric, imperial etc...)"
+              formControlName="units"
+            />
+            <mat-error
+              *ngIf="citiesGroups.controls[i].get('units')?.errors?.required"
+              >Choose Units</mat-error
+            >
+          </mat-form-field>
+          <button
+            class="addItem"
+            type="button"
+            (click)="addItem(item)"
+            [disabled]="item.get('result')?.value"
+          ></button>
+          <div class="cityWeather" *ngIf="item.get('result')?.value">
+            <span class="cityName">{{ item.get("result")?.value?.name }}</span>
+            <span class="temp"
+              >{{ item.get("result")?.value?.main?.temp >= 0 ? "+" : "-"
+              }}{{
+                item.get("result")?.value?.main?.temp | number: "1.0-0"
+              }}</span
+            >
+            <img class="icon" src="http://openweathermap.org/img/wn/{{item.get('result')?.value?.weather[0].icon}}@2x.png" alt="">
+          </div>
+          <div class="errorMsg" *ngIf="!item.get('result')?.value">{{ msg }}</div>
+        </div>
+      </div>
+    </form>
+    <div class="weatherInContainer">
+      <h2 class="weatherInTitle">Weather in:</h2>
+      <ol class="weatherList" *ngIf="currentWeather.length > 0">
+        <li class="item" *ngFor="let item of currentWeather; let i = index">
+          <span class="cityName">{{ item.cityName }} </span>
+          <span class="temp"
+            >{{ item.temp >= 0 ? "+" : "-"
+            }}{{ item.temp | number: "1.0-0" }}</span
+          >
+          <span class="status">; {{ item.weather }}</span>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
